@@ -27,6 +27,7 @@ public abstract class Graph {
 	private int numEdges;
 	//optional association of String labels to vertices 
 	private Map<Integer,String> vertexLabels;
+	private List<Integer> ds;
 	
 	/**
 	 * Create a new empty Graph
@@ -121,8 +122,29 @@ public abstract class Graph {
 	 * @return The degree sequence of this graph.
 	 */
 	public List<Integer> degreeSequence() {
-		// XXX: Implement in part 1 of week 1
-		return null;
+		
+		List< Integer> dSequences = new ArrayList<Integer>();
+		int v = getNumVertices();
+		for(int i =0; i < v; i++ ){
+			dSequences.add(getNeighbors(i).size());
+		}
+		
+		Object[] arrTemp = dSequences.toArray();
+		ds = new ArrayList<>();
+		int temp;
+		for(int i = 0; i < v; i++){
+			for(int j = i + 1; j < v; j ++){
+				if((int) arrTemp[i]< (int) arrTemp[j]){
+					temp =(int) arrTemp[i];
+					arrTemp[i] = arrTemp[j];
+					arrTemp[j] = temp;	
+				}
+				
+			}
+			ds.add((int)arrTemp[i]);
+		}
+
+		return ds;
 	}
 	
 	/**
@@ -130,7 +152,7 @@ public abstract class Graph {
 	 * @param v The starting vertex
 	 * @return A list of the vertices that can be reached in exactly two hops (by 
 	 * following two edges) from vertex v.
-	 * XXX: Implement in part 2 of week 1 for each subclass of Graph
+	 * 
 	 */
 	public abstract List<Integer> getDistance2(int v); 
 
@@ -141,6 +163,7 @@ public abstract class Graph {
 		String s = "\nGraph with " + numVertices + " vertices and " + numEdges + " edges.\n";
 		s += "Degree sequence: " + degreeSequence() + ".\n";
 		if (numVertices <= 20) s += adjacencyString();
+		if(getDistance2(1)!= null) s+= getDistance2(1).toString();
 		return s;
 	}
 
@@ -261,7 +284,8 @@ public abstract class Graph {
 		// Test your distance2 code here.
 		System.out.println("Testing distance-two methods on sample graphs...");
 		System.out.println("Goal: implement method using two approaches.");
-
+		
+		
 
 		
 	}
