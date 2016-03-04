@@ -1,15 +1,14 @@
 package roadgraph;
 
-import java.util.List;
-
 import geography.GeographicPoint;
 
 public class MapEdge {
 	private GeographicPoint startPoint;
 	private GeographicPoint endPoint;
 	private String streetName;
+	private String roadType;
 	double distance;
-	
+
 	public MapEdge(){
 		
 	}
@@ -30,5 +29,11 @@ public class MapEdge {
 	}
 	public void setStreetsName(String street){
 		streetName = street;
+	}
+	public String getRoadType(){
+		return roadType;
+	}
+	public void setRoadType(String type){
+		roadType = type;
 	}
 }

@@ -8,7 +8,11 @@
 package roadgraph;
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 
@@ -22,16 +26,22 @@ import util.GraphLoader;
  * Nodes in the graph are intersections between 
  *
  */
+
 public class MapGraph {
 	//TODO: Add your member variables here in WEEK 2
 	
-	
+	HashMap<GeographicPoint, List<MapNode> > vertices;
+	HashSet<MapEdge> edges;
+
 	/** 
 	 * Create a new empty MapGraph 
 	 */
 	public MapGraph()
 	{
 		// TODO: Implement in this constructor in WEEK 2
+		vertices = new HashMap<GeographicPoint, List<MapNode>>();
+		edges = new HashSet<MapEdge>();
+		
 	}
 	
 	/**
@@ -41,7 +51,7 @@ public class MapGraph {
 	public int getNumVertices()
 	{
 		//TODO: Implement this method in WEEK 2
-		return 0;
+		return vertices.values().size();
 	}
 	
 	/**
@@ -71,11 +81,18 @@ public class MapGraph {
 	 * not change the graph.
 	 * @param location  The location of the intersection
 	 * @return true if a node was added, false if it was not (the node
-	 * was already in the graph, or the parameter is null).
+	 */
+	public void addVertex(double latitude, double longitude)
+	{
+		GeographicPoint pt = new GeographicPoint(latitude, longitude);
+		this.addVertex(pt);
+	}
+	/* was already in the graph, or the parameter is null).
 	 */
 	public boolean addVertex(GeographicPoint location)
 	{
 		// TODO: Implement this method in WEEK 2
+		//if(location==null||)
 		return false;
 	}
 	
@@ -98,7 +115,7 @@ public class MapGraph {
 		
 	}
 	
-
+	
 	/** Find the path from start to goal using breadth first search
 	 * 
 	 * @param start The starting location
@@ -205,6 +222,7 @@ public class MapGraph {
 		MapGraph theMap = new MapGraph();
 		System.out.print("DONE. \nLoading the map...");
 		GraphLoader.loadRoadMap("data/testdata/simpletest.map", theMap);
+		System.out.println(theMap.getNumVertices());
 		System.out.println("DONE.");
 		
 		// You can use this method for testing.  
